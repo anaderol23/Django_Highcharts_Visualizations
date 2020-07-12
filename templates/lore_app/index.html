@@ -1,0 +1,32 @@
+{% extends "lore_app/base.html" %}
+{% block body_block %}
+
+<div class="jumbotron">
+    <h1 class="m-0">AWS Honeypot Attacks Dashboard</h1>
+</div>
+
+<h2> Overview </h2>
+<p> This project contains a few <a href="https://www.highcharts.com/">HighCharts</a> visualizations based on the "AWS
+    Honeypot Attacks" <a href="https://www.kaggle.com/casimian2000/aws-honeypot-attack-data">
+        dataset</a> from Kaggle.</p>
+<p>Front-End: HTML, JavaScript, Bootstrap, jQuery </p>
+<p>Back-End: Python, Django </p>
+
+<h2>Content</h2>
+<p>The AWS Honeypot Database is an open-source database including information on cyber attacks/attempts.</p>
+<p>The data consists in 451,581 data points collected from 9:53pm on 3 March 2013 to 5:55am on 8 September 2013.</p>
+<p>However, since this project's purpose is to demo my freshly developed web development skills, I have only loaded
+    98961 data points.</p>
+<h5>Honeypot attacks definition</h5>
+<p>As defined on <a href="https://en.wikipedia.org/wiki/Honeypot_(computing)">Wikipedia</a>, a "honeypot attack" is a
+    "computer security mechanism set to detect, deflect, or, in some manner, counteract attempts at
+    unauthorized use of information systems. Generally, a honeypot consists of data (for example, in a network site)
+    that appears to be a legitimate part of the site that seems to contain information or a resource of value to
+    attackers, but actually, is isolated and monitored and, enables blocking or analyzing the attackers. This is similar
+    to police sting operations, colloquially known as "baiting" a suspect."</p>
+<h2>Acknowledgements</h2>
+<p>Jay Jacobs & Bob Rudis: <a href="http://datadrivensecurity.info/blog/pages/dds-dataset-collection.html">http://datadrivensecurity.info/blog/pages/dds-dataset-collection.html</a></p>
+<p>Udemy course: <a href="https://www.udemy.com/course/python-and-django-full-stack-web-developer-bootcamp/">
+    Python and Django Full Stack Web Developer Bootcamp </a> </p>
+
+{% endblock %}

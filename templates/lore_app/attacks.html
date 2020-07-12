@@ -1,0 +1,96 @@
+{% extends "lore_app/base.html" %}
+{% block body_block %}
+
+<div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-light mx-1" onclick="loadNDisplayProto()">Attacks per protocol</button>
+    <button type="button" class="btn btn-light mx-1" onclick="loadNDisplayProtoPie()">Attacks per protocol (pie chart)</button>
+    <button type="button" class="btn btn-light mx-1" onclick="loadNDisplayHost()">Attacks per host</button>
+    <button type="button" class="btn btn-light mx-1" onclick="loadNDisplayHostProto()">Attacks per host & protocol</button>
+</div>
+
+<div id="chart-container" class="mt-4"></div>
+
+<script>
+
+function loadNDisplayHost() {
+    $.get('http://127.0.0.1:8000/attacks/host', function(data) {
+        renderColumnChartHost(data);
+    });
+}
+
+
+function loadNDisplayProto() {
+    $.get('http://127.0.0.1:8000/attacks/data', function(data) {
+        renderColumnChart(data);
+    });
+}
+
+function loadNDisplayProtoPie() {
+    $.get('http://127.0.0.1:8000/attacks/data', function(data) {
+        renderPieChart(data);
+    });
+}
+
+
+function loadNDisplayHostProto() {
+    $.get('http://127.0.0.1:8000/attacks/hostproto', function(data) {
+        renderColumnChartHostProtocol(data);
+    });
+}
+
+
+//proto
+function renderColumnChart(data) {
+    Highcharts.chart('chart-container', {
+        chart: {type: 'column'},
+        title: {text: data.title},
+        series: data.data.map(d => ({name: d.proto, data: [d.total]})),
+    });
+}
+
+
+function renderPieChart(data) {
+    Highcharts.chart('chart-container', {
+        chart: {type: 'pie'},
+        title: {text: data.title},
+        series: [{
+            name: "Total",
+            data: data.data.map(d => ({name: d.proto, y: d.total})),
+        }],
+    });
+}
+
+//host
+function renderColumnChartHost(data) {
+    Highcharts.chart('chart-container', {
+        chart: {type: 'column'},
+        title: {text: data.title},
+        series: data.data.map(d => ({name: d.host, data: [d.total]})),
+    });
+}
+
+//host proto
+function renderColumnChartHostProtocol(data) {
+    Highcharts.chart('chart-container', {
+        chart: {type: 'column'},
+        title: {text: data.title},
+        xAxis: {
+            categories: data.data.map(d => d.host)
+        },
+        series: [
+            {name: "ICMP", data: data.data.map(d => ({name: d.host, y: d.icmp_count}))},
+            {name: "UDP", data: data.data.map(d => ({name: d.host, y: d.udp_count}))},
+            {name: "TCP", data: data.data.map(d => ({name: d.host, y: d.tcp_count}))}
+        ],
+    });
+}
+
+$(document).ready(function() {
+    $.get('http://127.0.0.1:8000/attacks/host', function(data) {
+        renderColumnChartHost(data);
+    });
+});
+
+</script>
+
+{% endblock %}

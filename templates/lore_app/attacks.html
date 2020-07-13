@@ -88,7 +88,7 @@ function renderColumnChartHostProtocol(data) {
 }
 
 $(document).ready(function() {
-    $.get('http://127.0.0.1:8000/attacks/host', function(data) {
+    $.get(apiPath + '/attacks/host', function(data) {
         renderColumnChartHost(data);
     });
 });

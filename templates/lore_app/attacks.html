@@ -12,28 +12,30 @@
 
 <script>
 
+var apiPath = 'http://anaderol23.pythonanywhere.com';
+
 function loadNDisplayHost() {
-    $.get('http://127.0.0.1:8000/attacks/host', function(data) {
+    $.get(apiPath + '/attacks/host', function(data) {
         renderColumnChartHost(data);
     });
 }
 
 
 function loadNDisplayProto() {
-    $.get('http://127.0.0.1:8000/attacks/data', function(data) {
+    $.get(apiPath + '/attacks/data', function(data) {
         renderColumnChart(data);
     });
 }
 
 function loadNDisplayProtoPie() {
-    $.get('http://127.0.0.1:8000/attacks/data', function(data) {
+    $.get(apiPath + '/attacks/data', function(data) {
         renderPieChart(data);
     });
 }
 
 
 function loadNDisplayHostProto() {
-    $.get('http://127.0.0.1:8000/attacks/hostproto', function(data) {
+    $.get(apiPath + '/attacks/hostproto', function(data) {
         renderColumnChartHostProtocol(data);
     });
 }

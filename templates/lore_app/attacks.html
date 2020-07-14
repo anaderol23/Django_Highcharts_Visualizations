@@ -12,7 +12,8 @@
 
 <script>
 
-var apiPath = 'http://anaderol23.pythonanywhere.com';
+//var apiPath = 'http://anaderol23.pythonanywhere.com';
+var apiPath = 'http://127.0.0.1:8000';
 
 function loadNDisplayHost() {
     $.get(apiPath + '/attacks/host', function(data) {
@@ -46,7 +47,11 @@ function renderColumnChart(data) {
     Highcharts.chart('chart-container', {
         chart: {type: 'column'},
         title: {text: data.title},
-        series: data.data.map(d => ({name: d.proto, data: [d.total]})),
+        xAxis: {
+            categories: data.data.map(d => d.proto)
+        },
+        series: [{name: 'No. of attacks', data: data.data.map(d => ({name: d.proto, y: d.total}))}],
+        //series: data.data.map(d => ({name: d.proto, data: [d.total]})),
     });
 }
 
@@ -67,6 +72,9 @@ function renderColumnChartHost(data) {
     Highcharts.chart('chart-container', {
         chart: {type: 'column'},
         title: {text: data.title},
+        xAxis: {
+            categories: data.data.map(d => d.host)
+        },
         series: data.data.map(d => ({name: d.host, data: [d.total]})),
     });
 }
